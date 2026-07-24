@@ -1,0 +1,191 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+
+.fa-arrow-right {
+    font-size: 3px;
+    margin-right: 3px;
+}
+
+body {
+    background-color: #f5f6fa;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    min-height: calc(100vh - 76px);
+    width: 270px;
+    border-right: 1px solid #e5e7eb;
+}
+
+.sidebar .nav-link {
+    color: #374151;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+}
+
+.sidebar .nav-link.active {
+    background-color: #eef2ff;
+    color: #43b47c;
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f3f4f6;
+}
+
+/* Stat cards */
+.stat-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef0f3;
+}
+
+.stat-card .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+.stat-card .label {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.stat-card .value {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.bg-products {
+    background-color: #6366f1;
+}
+
+.bg-orders {
+    background-color: #f59e0b;
+}
+
+.bg-revenue {
+    background-color: #10b981;
+}
+
+.bg-users {
+    background-color: #ec4899;
+}
+
+/* Recent orders table */
+.card-table {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eef0f3;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-table .table thead th {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+    border-bottom: 1px solid #eef0f3;
+}
+
+.card-table .table td {
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.product-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #e5e7eb;
+}
+/* =========================================================
+   Responsive
+========================================================= */
+
+/* Tablets and below: sidebar becomes a horizontal scrollable
+   strip on top instead of a fixed left column */
+@media (max-width: 992px) {
+    .d-flex:has(.sidebar) {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 12px;
+    }
+
+    .sidebar .nav.flex-column {
+        flex-direction: row !important;
+        overflow-x: auto;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar .nav-item {
+        flex: 0 0 auto;
+    }
+
+    .sidebar .nav-link {
+        white-space: nowrap;
+        margin-bottom: 0;
+    }
+
+    .flex-grow-1.p-4 {
+        padding: 20px !important;
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    .stat-card {
+        padding: 16px 18px;
+    }
+
+    .stat-card .value {
+        font-size: 20px;
+    }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+    .flex-grow-1.p-4 {
+        padding: 14px !important;
+    }
+
+    .stat-card {
+        padding: 14px 16px;
+    }
+}
+.sidebar .nav-link {
+    color: #374151;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+

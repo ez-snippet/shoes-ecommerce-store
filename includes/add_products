@@ -1,0 +1,37 @@
+<?php
+include __DIR__ . "/../config/db.php";
+
+$products = [
+    ['Nike Air Max', 'image5.png', 6500.00, 'Comfortable running shoes with Air Max technology'],
+    ['Nike Running', 'image4.png', 6500.00, 'Lightweight running shoes for everyday use'],
+    ['Nike Retro', 'imag3.png', 6500.00, 'Classic retro style with modern comfort'],
+    ['Nike Classic', 'image2.png', 6500.00, 'Timeless classic design for all occasions'],
+    ['Nike Air Force', 'image6.png', 6500.00, 'Iconic Air Force style with premium comfort'],
+    ['Nike Jordan', 'image7.png', 6500.00, 'Legendary Jordan style for sneakerheads'],
+    ['Nike Zoom', 'image8.png', 6500.00, 'Responsive Zoom cushioning for performance'],
+    ['Nike Sport', 'image9.png', 6500.00, 'Versatile sport shoes for active lifestyle']
+];
+
+echo "<h2>Adding Products to Database...</h2>";
+
+foreach ($products as $product) {
+    $name = mysqli_real_escape_string($conn, $product[0]);
+    $image = mysqli_real_escape_string($conn, $product[1]);
+    $price = $product[2];
+    $description = mysqli_real_escape_string($conn, $product[3]);
+
+    $sql = "INSERT INTO products (name, image, price, description) 
+            VALUES ('$name', '$image', '$price', '$description')";
+
+    if (mysqli_query($conn, $sql)) {
+        $id = mysqli_insert_id($conn);
+        echo "✅ Added: $name (ID: $id)<br>";
+    } else {
+        echo "❌ Error: " . mysqli_error($conn) . "<br>";
+    }
+}
+
+echo "<br><strong>Done! Now you can order:</strong><br>";
+for ($i = 1; $i <= 8; $i++) {
+    echo "<a href='order_form.php?id=$i'>Product $i</a><br>";
+}

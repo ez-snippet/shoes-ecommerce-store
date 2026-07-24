@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========== FORM SECTION ========== */
+.main {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 40px;
+}
+
+.svg_image {
+    width: 450px;
+}
+
+.svg_image img {
+    width: 100%;
+    height: auto;
+}
+
+.form {
+    width: 450px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #1a2a3a;
+}
+
+.form input,
+.form textarea,
+.form select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+    background: #fff;
+    transition: border 0.3s;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+    border-color: #43b47c;
+    box-shadow: 0 0 0 3px rgba(67, 180, 124, 0.15);
+}
+
+.form textarea {
+    resize: none;
+    height: 120px;
+}
+
+.form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    background: linear-gradient(135deg, #43b47c, #2d8f5e);
+    color: #fff;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form button:hover {
+    background: #1a2a3a;
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(45, 143, 92, 0.3);
+}
+
+.form button i {
+    margin-right: 10px;
+}
+
+/* ========== RESPONSIVE FORM ========== */
+@media(max-width:768px) {
+    .main {
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+    .svg_image,
+    .form {
+        width: 100%;
+        max-width: 450px;
+    }
+}
+
+/* ============================================ */
+/* ========== REVIEW CARDS SECTION ========== */
+/* ============================================ */
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto 0;
+    padding: 40px 20px 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: transparent;
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a2a3a;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.heading::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #2d8f5c;;
+    margin: 10px auto 0;
+    border-radius: 4px;
+}
+
+/* ========== ROW (GRID) ========== */
+.row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+/* ========== CARD ========== */
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px 25px 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: left;
+    border: 1px solid #eef2f7;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    border-color: #e0e6ef;
+}
+
+/* ========== IMAGE ========== */
+.card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eef2f7;
+    margin-bottom: 12px;
+    transition: border-color 0.3s ease;
+    margin-left: 100px;
+}
+
+.card:hover img {
+    border-color: #2d8f5c;
+}
+
+/* ========== NAME ========== */
+.card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a2a3a;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.2px;
+}
+
+/* ========== RATING ========== */
+.card .rating {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #fbbf24;
+}
+
+/* ========== MESSAGE ========== */
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4a5a6a;
+    margin: 0 0 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 80px;
+    word-wrap: break-word;
+}
+
+/* ========== DATE ========== */
+.card small {
+    font-size: 0.7rem;
+    color: #9aaab8;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid #f0f2f5;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 0.3px;
+    display: block;
+}
+
+/* ========== RESPONSIVE CARDS ========== */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px 15px 40px;
+        margin-top: 30px;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .row {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        padding: 25px 20px 20px;
+    }
+
+    .card img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading {
+        font-size: 1.6rem;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 20px 18px 18px;
+    }
+
+    .card p {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 3;
+        max-height: 75px;
+    }
+}
+
+/* ========== SMOOTH SCROLL ========== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========== EMPTY STATE ========== */
+.row:empty::before {
+    content: 'No reviews yet. Be the first! 🎉';
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #9aaab8;
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+}

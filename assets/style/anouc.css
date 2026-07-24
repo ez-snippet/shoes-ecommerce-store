@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f6fa;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fa-arrow-right {
+    font-size: 3px;
+    margin-right: 3px;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #ffffff;
+    min-height: calc(100vh - 76px);
+    width: 270px;
+    flex-shrink: 0;
+    border-right: 1px solid #e5e7eb;
+}
+
+.sidebar .nav-link {
+    color: #374151;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar .nav-link.active {
+    background-color: #eef2ff;
+    color: #43b47c;
+    font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f3f4f6;
+}
+
+/* Stat cards */
+.stat-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef0f3;
+}
+
+.stat-card .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+.stat-card .label {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.stat-card .value {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.bg-products {
+    background-color: #6366f1;
+}
+
+.bg-orders {
+    background-color: #f59e0b;
+}
+
+.bg-revenue {
+    background-color: #10b981;
+}
+
+.bg-users {
+    background-color: #ec4899;
+}
+
+/* Recent orders table */
+.card-table {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eef0f3;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-table .table thead th {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+    border-bottom: 1px solid #eef0f3;
+}
+
+.card-table .table td {
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+.product-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: #e5e7eb;
+}
+
+/* =========================================================
+   Responsive
+========================================================= */
+
+/* Tablets and below: sidebar becomes a horizontal scrollable
+   strip on top instead of a fixed left column */
+@media (max-width: 992px) {
+    .d-flex:has(.sidebar) {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 12px;
+    }
+
+    .sidebar .nav.flex-column {
+        flex-direction: row !important;
+        overflow-x: auto;
+        gap: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sidebar .nav-item {
+        flex: 0 0 auto;
+    }
+
+    .sidebar .nav-link {
+        white-space: nowrap;
+        margin-bottom: 0;
+    }
+
+    .flex-grow-1.p-4 {
+        padding: 20px !important;
+    }
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-wrap: wrap;
+        row-gap: 8px;
+    }
+
+    .stat-card {
+        padding: 16px 18px;
+    }
+
+    .stat-card .value {
+        font-size: 20px;
+    }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+    .flex-grow-1.p-4 {
+        padding: 14px !important;
+    }
+
+    .stat-card {
+        padding: 14px 16px;
+    }
+}
+
+/* =========================================================
+   Contact / Feedback form
+========================================================= */
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    padding: 40px;
+}
+
+.svg_image {
+    width: 200px;
+}
+
+.svg_image img {
+    width: 400px;
+    height: auto;
+}
+
+.form {
+    width: 450px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    margin-left: 100px;
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 16px;
+}
+
+.form textarea {
+    resize: none;
+    height: 120px;
+}
+
+.form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    background: linear-gradient(135deg, #43b47c, #2d8f5e);
+    color: #fff;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form button:hover {
+    background: black;
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(45, 143, 92, 0.3);
+}
+
+.form .fa-solid {
+    font-size: 15px;
+    color: white;
+    margin-right: 10px;
+}
+
+.ok {
+    color: green;
+    border: 1px solid green;
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .svg_image,
+    .form {
+        width: 100%;
+        max-width: 450px;
+    }
+}
