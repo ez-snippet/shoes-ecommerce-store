@@ -61,7 +61,7 @@ README.md
 
 ## 👨‍💻 Developer
 
-**Ali Shaikh**
+**Ali**
 
 ---
 
