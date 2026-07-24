@@ -123,8 +123,8 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
                 <a href="image_open.php?img=<?= urlencode($p['image']) ?>&name=<?= urlencode($p['name']) ?>&price=<?= urlencode($p['price']) ?>">
                     <img class="shoe" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($p['name']) ?>">
                 </a>
-                <h2><?= htmlspecialchars($p['name']) ?></h2>
-                <div class="price">Rs. <?= htmlspecialchars($p['price']) ?></div>
+                <h2  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><?= htmlspecialchars($p['name']) ?></h2>
+                <div class="price" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Rs. <?= htmlspecialchars($p['price']) ?></div>
                 <div class="star">
                     <?= htmlspecialchars($p['stars']) ?>
                     <span class="rating-count">(50)</span>
