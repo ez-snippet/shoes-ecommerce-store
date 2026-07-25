@@ -121,7 +121,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
         ?>
             <div class="card_box">
                 <a href="image_open.php?img=<?= urlencode($p['image']) ?>&name=<?= urlencode($p['name']) ?>&price=<?= urlencode($p['price']) ?>">
-                    <img class="shoe" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($p['name']) ?>">
+                    <img class="shoe" loading="lazy" src="<?= htmlspecialchars($imageSrc) ?>" alt="<?= htmlspecialchars($p['name']) ?>">
                 </a>
                 <h2  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><?= htmlspecialchars($p['name']) ?></h2>
                 <div class="price" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Rs. <?= htmlspecialchars($p['price']) ?></div>
