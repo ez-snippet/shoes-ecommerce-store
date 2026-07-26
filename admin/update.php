@@ -11,17 +11,15 @@ if (isset($_POST['submit'])) {
 
     $image = "";
 
-    // sirf tab move karo jab file waqai upload hui ho aur error na ho
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0 && $_FILES['image']['name'] != "") {
 
         $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/Complete_e-commerce_store/uploads/";
 
-        // agar uploads folder na ho to bana do
+
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
 
-        // filename se spaces/brackets waghera hata do
         $originalName = basename($_FILES['image']['name']);
         $safeName = preg_replace('/[^A-Za-z0-9.\-_]/', '_', $originalName);
         $image = time() . '_' . $safeName;
@@ -31,7 +29,7 @@ if (isset($_POST['submit'])) {
 
         if (!move_uploaded_file($tmp, $targetPath)) {
             echo "<p style='color:red;'>Image upload fail ho gayi.</p>";
-            $image = ""; // fail hone par empty rakho
+            $image = "";
         }
     }
 
@@ -149,10 +147,19 @@ if (isset($_POST['submit'])) {
 
                         <button type="submit" name="submit" id="btn">
 
-                            ➕ Add Product
+                            <lord-icon
+                                src="https://cdn.lordicon.com/exymduqj.json"
+                                trigger="loop"
+                                delay="200"
+                                style="width:25px;height:25px; color: while;" >
+                            </lord-icon> Update Product
                         </button>
 
 
                     </form>
                 </div>
             </div>
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+</body>
+
+</html>
