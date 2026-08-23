@@ -65,9 +65,19 @@ if (isset($_POST['submit'])) {
 </body>
 
 <script>
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let subject = document.getElementById("subject").value;
+    let message = document.getElementById("message").value
     let btn = document.getElementById("btn");
     btn.addEventListener("click", () => {
-        alert("🚀 Message sent successfully! Thanks for reaching out. We'll reply soon. 💚")
+        if (name == "" || email == "" || phone == "" || subject == "" || message == "") {
+        alert("Please enter your details");
+    }
+        else {
+            alert("🚀 Message sent successfully! Thanks for reaching out. We'll reply soon. 💚")
+        }
     })
 </script>
 
