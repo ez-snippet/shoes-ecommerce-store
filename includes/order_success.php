@@ -56,7 +56,7 @@ if ($order_id > 0) {
     </div>
     <?php endif; ?>
     
-    <a href="../includes/home.php" class="btn-home">Continue Shopping</a>
+    <a href="../includes/index.php" class="btn-home">Continue Shopping</a>
 </div>
 </body>
 </html>

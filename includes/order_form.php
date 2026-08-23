@@ -92,219 +92,218 @@ $default_quantity = 1;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/style/order_form.css">
-  <style>
-    /* Additional inline styles for specific elements */
-    .input-with-icon {
-      position: relative;
-    }
-
-    .input-with-icon .icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #8a9bb0;
-      font-size: 1rem;
-    }
-
-    .input-with-icon input {
-      padding-left: 40px !important;
-    }
-
-    .field-group-required label::after {
-      content: '*';
-      color: #dc2626;
-      margin-left: 4px;
-    }
-  </style>
 </head>
 
 <body>
 
   <?php if (isset($error) && !$product): ?>
-    <div style="max-width: 800px; margin: 40px auto; padding: 40px; background: #fff; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); text-align: center;">
-      <div style="font-size: 56px; margin-bottom: 16px;">🔍</div>
-      <h2 style="color: #0b1a2a; margin-bottom: 8px;">Product Not Found</h2>
-      <p style="color: #6b7e9b; margin-bottom: 24px;"><?php echo htmlspecialchars($error); ?></p>
-      <a href="../includes/home.php" style="display: inline-block; background: #0b1a2a; color: white; padding: 12px 32px; border-radius: 12px; text-decoration: none; font-weight: 600; transition: 0.2s;">Go Back to Shopping</a>
+    <div class="not-found-card">
+      <div class="emoji">🔍</div>
+      <h2>Product Not Found</h2>
+      <p><?php echo htmlspecialchars($error); ?></p>
+      <a href="../includes/home.php">Go Back to Shopping</a>
     </div>
     <?php exit(); ?>
   <?php endif; ?>
 
-  <?php if (isset($error) && $product): ?>
-    <div class="error-message">
-      ⚠️ <?php echo htmlspecialchars($error); ?>
-    </div>
-  <?php endif; ?>
+  <div class="checkout-wrap">
 
-  <div class="card">
-    <h1>Complete Your Order</h1>
-    <div class="subhead">Please fill in your details to place your order</div>
+    <!-- Store header -->
+    <div class="store-header">
+      <div class="store-name">FairShoesCollection</div>
+    </div>
+
+    <?php if (isset($error) && $product): ?>
+      <div class="error-message">⚠️ <?php echo htmlspecialchars($error); ?></div>
+    <?php endif; ?>
 
     <form method="POST" action="" id="orderForm">
-      <div class="order-grid">
-        <!-- LEFT COLUMN -->
-        <div class="left-col">
-          <!-- Customer Information -->
-          <div>
-            <div class="section-title">Customer Information</div>
+    <div class="checkout-columns">
 
-            <div class="field-group field-group-required">
-              <label for="full_name">Full Name</label>
-              <div class="input-with-icon">
-                <span class="icon">👤</span>
-                <input type="text" id="full_name" name="full_name" placeholder="Enter your full name"  required>
-              </div>
-            </div>
+      <!-- LEFT: form -->
+      <div class="checkout-left">
+      <div class="checkout-body">
 
-            <div class="field-group field-group-required">
-              <label for="phone">Phone Number</label>
-              <div class="input-with-icon">
-                <span class="icon">📱</span>
-                <input type="text" id="phone" name="phone" placeholder="03XX-XXXXXXX"  required>
-              </div>
-              <div class="phone-hint">Format: 03XX-XXXXXXX</div>
-            </div>
+        <!-- Contact -->
+        <section class="checkout-section">
+          <h2>Contact</h2>
+          <div class="field">
+            <input type="email" id="email" name="email" placeholder="Email address" required>
+          </div>
+        </section>
 
-            <div class="field-group field-group-required">
-              <label for="email">Email Address</label>
-              <div class="input-with-icon">
-                <span class="icon">✉️</span>
-                <input type="email" id="email" name="email" placeholder="Enter your email"  required>
-              </div>
-            </div>
+        <!-- Delivery -->
+        <section class="checkout-section">
+          <h2>Delivery</h2>
+          <div class="field">
+            <select disabled>
+              <option>Pakistan</option>
+            </select>
+          </div>
+          <div class="field">
+            <input type="text" id="full_name" name="full_name" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <input type="text" id="address" name="address" placeholder="Address (House No, Street, Area)" required>
+          </div>
+          <div class="field">
+            <input type="text" id="city" name="city" placeholder="City" required>
+          </div>
+          <div class="field">
+            <input type="text" id="phone" name="phone" placeholder="Phone number (03XX-XXXXXXX)" required>
+            <div class="field-hint">Format: 03XX-XXXXXXX</div>
+          </div>
+        </section>
 
-            <div class="field-group field-group-required">
-              <label for="address">Address</label>
-              <div class="input-with-icon">
-                <span class="icon">🏠</span>
-                <input type="text" id="address" name="address" placeholder="House No, Street, Area"  required>
-              </div>
-            </div>
+        <!-- Order details / product options -->
+        <section class="checkout-section">
+          <h2>Order Details</h2>
 
-            <div class="field-group field-group-required">
-              <label for="city">City</label>
-              <div class="input-with-icon">
-                <span class="icon">📍</span>
-                <input type="text" id="city" name="city" placeholder="Enter your city" required>
-              </div>
-            </div>
+          <div class="product-row">
+            <span class="label">Product</span>
+            <span class="value"><?php echo htmlspecialchars($product['name']); ?></span>
+          </div>
+          <div class="product-row">
+            <span class="label">Price</span>
+            <span class="value price">Rs. <?php echo number_format($product['price']); ?></span>
           </div>
 
-          <!-- Order Details -->
-          <div>
-            <div class="section-title">Order Details</div>
-
-            <div class="product-row">
-              <span class="label">Product</span>
-              <span class="value"><?php echo htmlspecialchars($product['name']); ?></span>
-            </div>
-            <div class="product-row">
-              <span class="label">Price</span>
-              <span class="value price">Rs. <?php echo number_format($product['price']); ?></span>
-            </div>
-
-            <div style="margin-top: 1rem;">
-              <div style="font-weight: 600; font-size: 0.78rem; color: #2b3a57; margin-bottom: 0.2rem;">Size *</div>
-              <div class="chip-group" id="sizeGroup">
-                <?php
-                $sizes = [38, 39, 40, 41, 42, 43, 44];
-                foreach ($sizes as $size):
-                ?>
-                  <span class="chip <?php echo ($size == $default_size) ? 'active' : ''; ?>" data-value="<?php echo $size; ?>"><?php echo $size; ?></span>
-                <?php endforeach; ?>
-              </div>
-              <input type="hidden" name="size" id="selectedSize" value="<?php echo $default_size; ?>">
-            </div>
-
-            <div style="margin-top: 0.8rem;">
-              <div style="font-weight: 600; font-size: 0.78rem; color: #2b3a57; margin-bottom: 0.2rem;">Color *</div>
-              <div class="chip-group" id="colorGroup">
-                <?php
-                $colors = [
-                  ['name' => 'Black', 'bg' => '#111'],
-                  ['name' => 'Brown', 'bg' => ' #8B4513', 'border' => true],
-                ];
-                foreach ($colors as $color):
-                ?>
-                  <span class="chip color-chip <?php echo ($color['name'] == $default_color) ? 'active' : ''; ?>" data-value="<?php echo $color['name']; ?>">
-                    <span class="color-dot" style="background:<?php echo $color['bg']; ?>; <?php echo isset($color['border']) ? 'border:1.5px solid #c5d2e0;' : ''; ?>"></span>
-                    <?php echo $color['name']; ?>
-                  </span>
-                <?php endforeach; ?>
-              </div>
-              <input type="hidden" name="color" id="selectedColor" value="<?php echo $default_color; ?>">
-            </div>
-
-            <div style="margin-top: 0.8rem;">
-              <div style="font-weight: 600; font-size: 0.78rem; color: #2b3a57; margin-bottom: 0.2rem;">Quantity *</div>
-              <div class="quantity-wrapper">
-                <button type="button" onclick="decreaseQuantity()" style="width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #e4e9f2; background: #fafcff; cursor: pointer; font-size: 1.2rem; font-weight: 600; color: #0b1a2a; transition: 0.2s;">−</button>
-                <input type="number" name="quantity" id="quantity" value="<?php echo $default_quantity; ?>" min="1" max="10">
-                <button type="button" onclick="increaseQuantity()" style="width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #e4e9f2; background: #fafcff; cursor: pointer; font-size: 1.2rem; font-weight: 600; color: #0b1a2a; transition: 0.2s;">+</button>
-              </div>
-            </div>
-
-            <!-- Payment Method -->
-            <div style="margin-top: 1.2rem;">
-              <div style="font-weight: 600; font-size: 0.78rem; color: #2b3a57; margin-bottom: 0.4rem;">Payment Method *</div>
-              <div class="payment-group">
-                <div class="payment-item">
-                  <input type="radio" name="payment_method" id="cod" value="Cash on Delivery" checked>
-                  <label for="cod">Cash on Delivery (COD)</label>
-                </div>
-              </div>
-            </div>
-
-            <!-- Order Notes -->
-            <div class="order-notes">
-              <label for="notes" style="font-weight: 600; font-size: 0.78rem; color: #2b3a57; display: block; margin-bottom: 0.3rem;">Order Notes (Optional)</label>
-              <textarea id="notes" name="notes" placeholder="Write any notes about your order...">Leave at the reception</textarea>
-            </div>
-
-            <!-- Complete Order Button -->
-            <button type="submit" class="btn-complete">
-              <span>Complete Order</span>
-              <span class="arrow">→</span>
-            </button>
-            <div class="secure-note">🔒 Your information is safe and secure</div>
+          <div class="option-label">Size *</div>
+          <div class="chip-group" id="sizeGroup">
+            <?php
+            $sizes = [ 39, 40, 41, 42, 43, 44];
+            foreach ($sizes as $size):
+            ?>
+              <span class="chip <?php echo ($size == $default_size) ? 'active' : ''; ?>" data-value="<?php echo $size; ?>"><?php echo $size; ?></span>
+            <?php endforeach; ?>
           </div>
+          <input type="hidden" name="size" id="selectedSize" value="<?php echo $default_size; ?>">
+
+          <div class="option-label">Color *</div>
+          <div class="chip-group" id="colorGroup">
+            <?php
+            $colors = [
+              ['name' => 'Black', 'bg' => '#111111'],
+              ['name' => 'Brown', 'bg' => '#8B4513'],
+            ];
+            foreach ($colors as $color):
+            ?>
+              <span class="chip color-chip <?php echo ($color['name'] == $default_color) ? 'active' : ''; ?>" data-value="<?php echo $color['name']; ?>">
+                <span class="color-dot" style="background:<?php echo $color['bg']; ?>;"></span>
+                <?php echo $color['name']; ?>
+              </span>
+            <?php endforeach; ?>
+          </div>
+          <input type="hidden" name="color" id="selectedColor" value="<?php echo $default_color; ?>">
+
+          <div class="option-label">Quantity *</div>
+          <div class="quantity-wrapper">
+            <button type="button" onclick="decreaseQuantity()">−</button>
+            <input type="number" name="quantity" id="quantity" value="<?php echo $default_quantity; ?>" min="1" max="10">
+            <button type="button" onclick="increaseQuantity()">+</button>
+          </div>
+        </section>
+
+        <!-- Shipping method -->
+        <section class="checkout-section">
+          <h2>Shipping method</h2>
+          <div class="method-box">
+            <div class="method-box-top">
+              <span>Standard Shipping</span>
+              <span class="free-tag">FREE</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payment -->
+        <section class="checkout-section">
+          <div class="section-header-row" style="margin-bottom: 0.3rem;">
+            <h2>Payment</h2>
+          </div>
+          <p class="field-hint" style="margin-bottom: 1rem;">All transactions are secure and encrypted.</p>
+          <div class="method-box">
+            <div class="method-box-title">
+              <input type="radio" name="payment_method" id="cod" value="Cash on Delivery" checked>
+              <label for="cod">Cash on Delivery (COD)</label>
+            </div>
+            <div class="method-box-detail">
+              COD (Cash on Delivery) means you pay for the product when it arrives at your door.
+              <span class="urdu">کیش آن ڈیلیوری کا مطلب ہے کہ آپ پارسل ملنے پر ادائیگی کریں گے۔</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Billing address -->
+        <section class="checkout-section">
+          <h2>Billing address</h2>
+          <label class="radio-option selected">
+            <span class="radio-left">
+              <input type="radio" name="billing_same" checked>
+              Same as shipping address
+            </span>
+          </label>
+          <label class="radio-option">
+            <span class="radio-left">
+              <input type="radio" name="billing_same">
+              Use a different billing address
+            </span>
+          </label>
+        </section>
+
+        <!-- Order notes -->
+        <section class="checkout-section" style="border-bottom: none;">
+          <h2>Order Notes (Optional)</h2>
+          <div class="field">
+            <textarea id="notes" name="notes" placeholder="Write any notes about your order..."></textarea>
+          </div>
+        </section>
+
+        <button type="submit" class="btn-complete" style="margin: 1rem 0 0.5rem 0;">Complete order</button>
+        <div class="secure-note">🔒 Your information is safe and secure</div>
+        <a href="#" class="privacy-link">Privacy policy</a>
+
+      </div>
+      </div>
+
+      <!-- RIGHT: sticky order summary -->
+      <div class="checkout-right">
+        <div class="summary-line-item">
+          <div class="thumb">
+            👟
+            <span class="qty-badge" id="thumbQtyBadge"><?php echo $default_quantity; ?></span>
+          </div>
+          <div class="line-item-info">
+            <div class="name"><?php echo htmlspecialchars($product['name']); ?></div>
+            <div class="variant">
+              Size <span id="summarySizeLine"><?php echo $default_size; ?></span> ·
+              <span id="summaryColorLine"><?php echo $default_color; ?></span>
+            </div>
+          </div>
+          <div class="line-item-price" id="lineItemPrice">Rs <?php echo number_format($product['price']); ?></div>
         </div>
 
-        <!-- RIGHT COLUMN: Order Summary -->
-        <div class="right-col">
-          <div>
-            <div class="section-title" style="border-bottom: none; margin-bottom: 0.5rem;">Order Summary</div>
-            <div class="summary-card">
-              <div class="summary-item">
-                <span class="label"><?php echo htmlspecialchars($product['name']); ?></span>
-                <span class="value">Rs. <?php echo number_format($product['price']); ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Size</span>
-                <span class="value" id="summarySize"><?php echo $default_size; ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Color</span>
-                <span class="value" id="summaryColor"><?php echo $default_color; ?></span>
-              </div>
-              <div class="summary-item">
-                <span class="label">Quantity</span>
-                <span class="value" id="summaryQuantity"><?php echo $default_quantity; ?></span>
-              </div>
-              <div class="summary-total">
-                <span class="total-label">Total</span>
-                <span id="summaryTotal">Rs. <?php echo number_format($product['price']); ?></span>
-              </div>
-              <div class="summary-confirm">
-                Your order will be confirmed after successful payment.
-              </div>
-            </div>
-          </div>
+        <div class="discount-row">
+          <input type="text" placeholder="Discount code">
+          <button type="button">Apply</button>
+        </div>
 
-          <div style="flex:1; min-height: 20px;"></div>
+        <div class="cost-row">
+          <span class="label">Subtotal · <span id="subtotalQtyLabel">1 item</span></span>
+          <span id="detailSubtotal">Rs <?php echo number_format($product['price']); ?></span>
+        </div>
+        <div class="cost-row">
+          <span class="label">Shipping</span>
+          <span>FREE</span>
+        </div>
+        <div class="cost-row total-row-final">
+          <span class="label">Total</span>
+          <span class="total-value">
+            <span class="currency">PKR</span><span class="amount" id="summaryTotal">Rs <?php echo number_format($product['price']); ?></span>
+          </span>
         </div>
       </div>
+
+    </div>
     </form>
   </div>
 
@@ -337,8 +336,7 @@ $default_quantity = 1;
         this.classList.add('active');
         const value = this.dataset.value;
         document.getElementById('selectedSize').value = value;
-        document.getElementById('summarySize').textContent = value;
-        updateTotal();
+        document.getElementById('summarySizeLine').textContent = value;
       });
     });
 
@@ -349,26 +347,33 @@ $default_quantity = 1;
         this.classList.add('active');
         const value = this.dataset.value;
         document.getElementById('selectedColor').value = value;
-        document.getElementById('summaryColor').textContent = value;
+        document.getElementById('summaryColorLine').textContent = value;
+      });
+    });
+
+    // Billing address radio styling
+    document.querySelectorAll('.radio-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+        this.querySelector('input[type="radio"]').checked = true;
       });
     });
 
     // Update quantity and total
-    document.getElementById('quantity').addEventListener('change', function() {
-      updateSummary();
-    });
+    document.getElementById('quantity').addEventListener('change', updateSummary);
 
     function updateSummary() {
       const quantity = parseInt(document.getElementById('quantity').value) || 1;
-      document.getElementById('summaryQuantity').textContent = quantity;
-      updateTotal();
-    }
-
-    function updateTotal() {
-      const quantity = parseInt(document.getElementById('quantity').value) || 1;
       const price = <?php echo $product['price']; ?>;
       const total = price * quantity;
-      document.getElementById('summaryTotal').textContent = 'Rs. ' + total.toLocaleString();
+      const formatted = 'Rs ' + total.toLocaleString();
+
+      document.getElementById('thumbQtyBadge').textContent = quantity;
+      document.getElementById('subtotalQtyLabel').textContent = quantity + (quantity > 1 ? ' items' : ' item');
+      document.getElementById('lineItemPrice').textContent = formatted;
+      document.getElementById('detailSubtotal').textContent = formatted;
+      document.getElementById('summaryTotal').textContent = formatted;
     }
   </script>
 

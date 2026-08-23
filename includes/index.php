@@ -11,9 +11,9 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair shoes.pk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/Complete_e-commerce_store/assets/style/home.css">
     <link rel="icon" href="/uploads/logo.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Complete_e-commerce_store/assets/style/home.css">
 
 </head>
 
