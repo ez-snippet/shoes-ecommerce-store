@@ -1,18 +1,17 @@
 <?php
 include __DIR__ . "/../config/db.php";
+$message = "";
+
 if (isset($_POST['submit'])) {
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if ($username === "admin" && $password === "admin123") {
-
+    $name = $_POST['name'];
+    $pass = $_POST['pass'];
+    if (empty($name) || empty($pass)) {
+        $message = "please Enter your username and password";
+    } elseif ($name == "admin" && $pass == "ayazshk") {
         header("Location:dashboard.php");
-        exit();
-    }
-    else{
-        echo "invalid username and password";
-        exit();
+        exit;
+    } else {
+        $message = "invalid username and password";
     }
 }
 ?>
@@ -27,12 +26,14 @@ if (isset($_POST['submit'])) {
 <body>
     <form method="post">
         <div class="login-card">
+            <p style="text-align: center; margin-top: 10px; color: red; background-color: black; padding: 10px;"> <?php echo $message ?></p>
             <h2>Admin Form</h2>
-            <input type="text" name="username" placeholder="Enter your Admin username" />
-            <input type="password" name="password" placeholder=" Enter your Admin Password" />
+            <input type="text" name="name" placeholder="Enter your Admin username" />
+            <input type="password" name="pass" placeholder=" Enter your Admin Password" />
             <button name="submit"> <i class="fa-solid fa-arrow-right-to-bracket"></i>Login</button>
         </div>
     </form>
 
 </body>
+
 </html>
