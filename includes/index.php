@@ -44,7 +44,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
+                        <a class="nav-link" href="#products">Products</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../includes/review.php">Review</a>
@@ -103,6 +103,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
     </div>
 
     <img src="/Complete_e-commerce_store/uploads/banner4.jpg" alt="" class="aliiii">
+    <section id="products">
     <h2 class="leteast">Latest <span class="product">Products</span></h2>
     <div class="mian_div">
 
@@ -134,6 +135,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
                 </a>
             </div>
         <?php } ?>
+</section>
 
         <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
@@ -160,7 +162,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h5 class="fw-bold mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="home.php" class="text-decoration-none text-secondary">Home</a></li>
+                        <li><a href="index.php" class="text-decoration-none text-secondary">Home</a></li>
                         <li><a href="home.php" class="text-decoration-none text-secondary">Products</a></li>
                         <li><a href="feed_back_form.php" class="text-decoration-none text-secondary">Contact</a></li>
                     </ul>
