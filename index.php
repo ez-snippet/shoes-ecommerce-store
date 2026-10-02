@@ -1,6 +1,6 @@
 <?php 
 
-header("location:/includes/index.php");
+header("Location:includes\index.php");
 exit();
 
 ?>
