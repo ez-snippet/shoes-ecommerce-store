@@ -50,7 +50,7 @@ $sql = mysqli_query($conn, "SELECT * FROM products");
                         <a class="nav-link" href="../includes/review.php">Review</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../includes/feed_back_form.php">Contact</a>
+                        <a class="nav-link" href="/includes/r">Contact</a>
                     </li>
                     <span title="Admin">
                         <a href="../admin/admin_form.php">
