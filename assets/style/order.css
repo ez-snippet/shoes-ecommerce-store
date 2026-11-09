@@ -1,0 +1,130 @@
+/* =========================================================
+   Orders page
+   (variables --ink, --muted, --line, --accent, --accent-2
+    dashboard.css se aate hain)
+========================================================= */
+
+/* ---------- Page header ---------- */
+.page-head {
+    margin-bottom: 24px;
+}
+
+.page-head h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.page-head p {
+    color: var(--muted);
+    margin-top: 4px;
+    font-size: 15px;
+}
+
+.count-pill {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- Table cells ---------- */
+.card-table .table td {
+    padding: 16px;
+}
+
+.muted-id {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.strong {
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.cell-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 170px;
+}
+
+.product-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ---------- Badges ---------- */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 150px;
+}
+
+.badge-soft {
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-pay {
+    display: inline-block;
+    background: #eef2ff;
+    color: #3730a3;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ---------- Action button ---------- */
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #334155;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-btn.danger {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.icon-btn.danger:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    transform: translateY(-1px);
+}

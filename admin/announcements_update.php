@@ -4,8 +4,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$result = mysqli_query($conn, "SELECT * FROM announcements WHERE id = $id");
-$row = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare("SELECT * FROM announcements WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$row = $stmt->get_result()->fetch_assoc();
+$stmt->close();
 
 // If no announcement found with that id, send back to the list instead of showing a broken form
 if (!$row) {
@@ -14,13 +17,17 @@ if (!$row) {
 }
 
 if (isset($_POST['submit'])) {
-    $message = mysqli_real_escape_string($conn, $_POST['message']);
-    $sql = "UPDATE announcements SET message = '$message' WHERE id = $id";
-    mysqli_query($conn, $sql);
+    $message = trim($_POST['message']);
+    $stmt = $conn->prepare("UPDATE announcements SET message = ? WHERE id = ?");
+    $stmt->bind_param("si", $message, $id);
+    $stmt->execute();
+    $stmt->close();
     header("Location: acnounch.php");
     exit;
 }
 
+// Announcements wale dono pages par sidebar ka item active rahe
+$on_announcements = in_array($current_page, ['acnounch.php', 'announcements_update.php']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,36 +35,48 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Update Announcement - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Complete_e-commerce_store/assets/style/dashboard.css">
     <link rel="stylesheet" href="/Complete_e-commerce_store/assets/style/anouc.css">
-    <link rel="icon" href="/uploads/logo.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/Complete_e-commerce_store/uploads/logo.jpg">
 </head>
 
 <body>
 
+    <!-- SVG icon set -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></symbol>
+            <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12l2 5v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7z"/><path d="M4 7h16M9 11a3 3 0 0 0 6 0"/></symbol>
+            <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-5.5A8 8 0 1 1 21 12z"/></symbol>
+            <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.2 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
+            <symbol id="i-megaphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l8 5V5L7 10H4a1 1 0 0 0-1 1z"/><path d="M19 9a4 4 0 0 1 0 6"/></symbol>
+            <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+            <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+            <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+        </defs>
+    </svg>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="dashboard.php">
                 <img src="/Complete_e-commerce_store/uploads/logo.jpg" alt="Logo" class="logo" style="width: 50px; height: 50px; border-radius: 50%;">
             </a>
-            <button
-                class="navbar-toggler d-lg-none"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId"
-                aria-controls="collapsibleNavId"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link mt-1" href="#">Welcome Admin 👋</a>
+                        <div class="admin-chip">
+                            <div class="admin-avatar">A</div>
+                            <span>Welcome, Admin</span>
+                        </div>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -70,71 +89,71 @@ if (isset($_POST['submit'])) {
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="dashboard.php">
-                        <i class="fa-solid fa-house me-2"></i>Dashboard
+                        <svg><use href="#i-home"/></svg>Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $current_page == 'add_product.php' ? 'active' : '' ?>" href="add_product.php">
-                        <i class="fa-solid fa-shoe-prints me-2"></i> Add Products
+                        <svg><use href="#i-plus"/></svg>Add Products
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $current_page == 'orders.php' ? 'active' : '' ?>" href="orders.php">
-                        <i class="fa-solid fa-box me-2"></i>Orders
+                        <svg><use href="#i-bag"/></svg>Orders
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $current_page == 'user_message_show.php' ? 'active' : '' ?>" href="user_message_show.php">
-                        <i class="fa-solid fa-message me-2"></i>Customer Messages
+                        <svg><use href="#i-chat"/></svg>Customer Messages
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $current_page == 'reviews_show.php' ? 'active' : '' ?>" href="reviews_show.php">
-                        <i class="fa-solid fa-star me-2"></i>Reviews
+                        <svg><use href="#i-star"/></svg>Reviews
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $current_page == 'acnounch.php' ? 'active' : '' ?>" href="acnounch.php">
-                        <i class="fa-solid fa-bullhorn me-2 "></i>Announcements
+                    <a class="nav-link <?= $on_announcements ? 'active' : '' ?>" href="acnounch.php">
+                        <svg><use href="#i-megaphone"/></svg>Announcements
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mt-3">
                     <a class="nav-link text-danger" href="../admin/logout.php">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Logout
+                        <svg><use href="#i-logout"/></svg>Logout
                     </a>
                 </li>
             </ul>
         </div>
         <!-- /Sidebar -->
 
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
+        <!-- Main content -->
+        <div class="flex-grow-1 p-4">
 
-            <!-- Update announcement form -->
-            <div class="main">
-                <div class="svg_image">
-                    <img src="../uploads/ali.png" alt="Contact SVG">
+            <div class="page-head d-flex justify-content-between align-items-end flex-wrap gap-2">
+                <div>
+                    <h1>Update Announcement</h1>
+                    
                 </div>
-                <div class="form">
-                    <h2>✏️ Update Announcement</h2>
+                <a href="acnounch.php" class="btn-back"><svg><use href="#i-back"/></svg>Back</a>
+            </div>
 
-                    <form method="post" id="form">
+            <div class="card-table p-4">
+                <h6 class="section-title">Edit announcement #<?= (int) $row['id'] ?></h6>
 
-                        <textarea name="message" id="message" placeholder="Type your announcement here..." required><?= htmlspecialchars($row['message']) ?></textarea>
-                        <br>
-
-
-                        <button type="submit" name="submit" id="btn">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            Update Announcement
-                        </button>
-
-                    </form>
-                </div>
+                <form method="post" id="form">
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" required
+                            placeholder="Type your announcement here..."><?= htmlspecialchars($row['message']) ?></textarea>
+                    </div>
+                    <button type="submit" name="submit" id="btn" class="btn-grad btn-inline">
+                        <svg><use href="#i-edit"/></svg>Update Announcement
+                    </button>
+                </form>
             </div>
 
         </div>
-        <!-- /Content wrapper -->
+        <!-- /Main content -->
 
     </div>
 

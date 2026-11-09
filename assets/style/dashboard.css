@@ -303,3 +303,76 @@ body {
         padding: 16px;
     }
 }
+.admin-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 18px 6px 6px;
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+}
+
+.admin-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #14c993, #059669);
+    color: #ffffff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+}
+/* SVG icons */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sidebar .nav-link svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-right: 0;
+}
+
+.stat-card .icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Welcome chip */
+.admin-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 18px 6px 6px;
+    box-shadow: var(--shadow-sm);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+}
+
+.admin-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #14c993, #059669);
+    color: #ffffff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.35);
+}
+
